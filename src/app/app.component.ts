@@ -37,7 +37,7 @@ import { ContactComponent } from './components/contact/contact.component';
   styles: [`
     .app-shell { background: var(--background); min-height: 100vh; }
     .site-footer {
-      border-top: 1px solid var(--border);
+      border-top: 1px solid rgba(15, 23, 42, 0.08);
       padding: 32px 0;
       text-align: center;
     }

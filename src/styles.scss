@@ -1,6 +1,30 @@
 * { box-sizing: border-box; }
 
 :root {
+  /* LIGHT THEME (Default) */
+  --background: #F1F5F9;
+  --foreground: #0F172A;
+  --card: #FFFFFF;
+  --card-foreground: #0F172A;
+  --primary: #0284C7;
+  --primary-foreground: #FFFFFF;
+  --secondary: #7C3AED;
+  --secondary-foreground: #FFFFFF;
+  --muted: #E2E8F0;
+  --muted-foreground: #64748B;
+  --accent: #059669;
+  --accent-foreground: #FFFFFF;
+  --border: rgba(15, 23, 42, 0.09);
+  --ring: rgba(2, 132, 199, 0.3);
+
+  --radius: 0.5rem;
+  --font-display: 'Rajdhani', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Inter', sans-serif;
+}
+
+/* DARK THEME OVERRIDES */
+body.dark {
   --background: #04040a;
   --foreground: #e8e8f0;
   --card: #0a0a18;
@@ -15,13 +39,13 @@
   --accent-foreground: #04040a;
   --border: rgba(0, 200, 255, 0.12);
   --ring: rgba(0, 200, 255, 0.4);
-  --radius: 0.5rem;
-  --font-display: 'Rajdhani', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
-  --font-sans: 'Inter', sans-serif;
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
+}
 
 body {
   margin: 0;
@@ -29,6 +53,8 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
   overflow-x: hidden;
+  width: 100%;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -37,9 +63,13 @@ p, h1, h2, h3, h4 { margin: 0; }
 
 ::-webkit-scrollbar { width: 3px; }
 ::-webkit-scrollbar-track { background: var(--background); }
-::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 2px; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 2px; }
 
-.max-w { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+body.dark ::-webkit-scrollbar-thumb { background: var(--primary); }
+
+
+.max-w { max-width: 1280px; margin: 0 auto; padding: 0 16px; width: 100%; }
+@media (min-width: 480px) { .max-w { padding: 0 24px; } }
 @media (min-width: 1024px) { .max-w { padding: 0 48px; } }
 
 .section-pretitle {
@@ -59,9 +89,9 @@ p, h1, h2, h3, h4 { margin: 0; }
 
 .section-title {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: clamp(2rem, 5.5vw, 4.2rem);
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.05;
   color: var(--foreground);
 }
 

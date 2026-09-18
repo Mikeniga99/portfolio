@@ -58,50 +58,54 @@ import { SVG_ICONS } from '../../utils/icons';
     </section>
   `,
   styles: [`
-    .experience { position: relative; padding: 112px 0; overflow: hidden; }
-    @media (min-width: 768px) { .experience { padding: 144px 0; } }
+    .experience { position: relative; padding: 72px 0; overflow: hidden; }
+    @media (min-width: 768px) { .experience { padding: 112px 0; } }
+    @media (min-width: 1024px) { .experience { padding: 144px 0; } }
     .glow-left {
       position: absolute; left: 0; top: 50%; transform: translate(-40%, -50%);
       width: 320px; height: 320px; pointer-events: none;
-      background: radial-gradient(circle, rgba(0,200,255,0.04) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(2, 132, 199, 0.03) 0%, transparent 70%);
     }
 
-    .timeline { position: relative; padding-left: 32px; }
-    @media (min-width: 768px) { .timeline { padding-left: 64px; } }
+    .timeline { position: relative; padding-left: 20px; }
+    @media (min-width: 640px) { .timeline { padding-left: 36px; } }
+    @media (min-width: 1024px) { .timeline { padding-left: 64px; } }
     .tl-line {
       position: absolute; left: 0; top: 0; bottom: 0; width: 1px;
-      background: linear-gradient(to bottom, var(--primary), rgba(123,47,255,0.3), transparent);
+      background: linear-gradient(to bottom, var(--primary), rgba(124, 58, 237, 0.3), transparent);
     }
     .tl-dot {
       position: absolute; left: 0; top: 8px; width: 12px; height: 12px; border-radius: 50%;
-      transform: translateX(-50%); background: var(--primary); box-shadow: 0 0 16px var(--primary);
+      transform: translateX(-50%); background: var(--primary);
     }
 
     .card-perspective { perspective: 1000px; }
-    .card-perspective.community { margin-top: 40px; }
+    .card-perspective.community { margin-top: 32px; }
 
     .job-card {
-      border: 1px solid var(--border); background: var(--card); padding: 32px; max-width: 48rem;
-      position: relative;
+      border: 1px solid var(--border); background: var(--card); padding: 24px 20px; max-width: 48rem;
+      position: relative; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
     }
-    @media (min-width: 768px) { .job-card { padding: 40px; } }
-    .job-top { display: flex; justify-content: space-between; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+    @media (min-width: 640px) { .job-card { padding: 32px; } }
+    @media (min-width: 1024px) { .job-card { padding: 40px; } }
+    .job-top { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
     .job-date { font-size: 12px; letter-spacing: 0.1em; color: var(--muted-foreground); font-family: var(--font-mono); }
-    .job-badge { margin-left: 12px; padding: 2px 8px; font-size: 12px; border: 1px solid var(--accent); color: var(--accent); font-family: var(--font-mono); }
-    .job-title { font-family: var(--font-display); font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; color: var(--foreground); line-height: 1.1; margin-bottom: 4px; }
-    .job-company { color: var(--primary); font-family: var(--font-mono); font-size: 14px; margin-bottom: 32px; }
+    .job-badge { margin-left: 8px; padding: 2px 8px; font-size: 11.5px; border: 1px solid var(--accent); color: var(--accent); font-family: var(--font-mono); font-weight: 500; }
+    .job-title { font-family: var(--font-display); font-size: clamp(1.4rem, 2.8vw, 2.2rem); font-weight: 700; color: var(--foreground); line-height: 1.15; margin-bottom: 4px; }
+    .job-company { color: var(--primary); font-family: var(--font-mono); font-size: 13.5px; margin-bottom: 24px; font-weight: 500; }
     .job-list { display: flex; flex-direction: column; gap: 12px; }
-    .job-list li { display: flex; gap: 12px; font-size: 14px; line-height: 1.6; color: var(--muted-foreground); }
+    .job-list li { display: flex; gap: 12px; font-size: 13.5px; line-height: 1.6; color: var(--muted-foreground); }
     .bullet { color: var(--primary); flex-shrink: 0; margin-top: 4px; width: 10px; height: 10px; }
     .bullet svg { width: 100%; height: 100%; }
-    .job-line { margin-top: 32px; height: 1px; width: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary), transparent); }
+    .job-line { margin-top: 28px; height: 1px; width: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary), transparent); }
 
     .community-card {
-      border: 1px solid rgba(123,47,255,0.2); background: rgba(123,47,255,0.04); padding: 24px 32px; max-width: 48rem;
+      border: 1px solid rgba(124, 58, 237, 0.12); background: rgba(124, 58, 237, 0.04); padding: 20px 18px; max-width: 48rem;
     }
-    .community-title { margin-bottom: 16px; font-size: 14px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--secondary); font-family: var(--font-mono); }
+    @media (min-width: 640px) { .community-card { padding: 24px 32px; } }
+    .community-title { margin-bottom: 16px; font-size: 13.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--secondary); font-family: var(--font-mono); }
     .community-list { display: flex; flex-direction: column; gap: 8px; }
-    .community-list li { display: flex; gap: 12px; font-size: 14px; color: var(--muted-foreground); }
+    .community-list li { display: flex; gap: 12px; font-size: 13.5px; color: var(--muted-foreground); }
     .bullet2 { color: var(--secondary); flex-shrink: 0; width: 10px; height: 10px; margin-top: 4px; }
     .bullet2 svg { width: 100%; height: 100%; }
   `],

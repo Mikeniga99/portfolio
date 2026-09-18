@@ -69,7 +69,7 @@ interface Project {
                   </div>
 
                   <!-- BACK -->
-                  <div class="face back" [style.background]="'linear-gradient(135deg, ' + p.accent + '12 0%, rgba(10,10,24,0.98) 60%)'" [style.borderColor]="p.accent + '45'">
+                  <div class="face back" [style.background]="'linear-gradient(135deg, ' + p.accent + '08 0%, var(--card) 60%)'" [style.borderColor]="p.accent + '35'">
                     <div class="back-grid" [style.backgroundImage]="'linear-gradient(' + p.accent + '08 1px, transparent 1px), linear-gradient(90deg, ' + p.accent + '08 1px, transparent 1px)'"></div>
 
                     <div class="back-top">
@@ -110,16 +110,19 @@ interface Project {
     </section>
   `,
   styles: [`
-    .projects { position: relative; padding: 112px 0; overflow: hidden; }
-    @media (min-width: 768px) { .projects { padding: 144px 0; } }
-    .bg-glow { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 80% 50% at 50% 50%, rgba(0,200,255,0.025) 0%, transparent 70%); }
-    .hint { margin-bottom: 48px; font-family: var(--font-mono); font-size: 11px; color: var(--muted-foreground); letter-spacing: 0.1em; }
+    .projects { position: relative; padding: 72px 0; overflow: hidden; }
+    @media (min-width: 768px) { .projects { padding: 112px 0; } }
+    @media (min-width: 1024px) { .projects { padding: 144px 0; } }
+    .bg-glow { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 80% 50% at 50% 50%, var(--ring) 0%, transparent 70%); opacity: 0.15; }
+    .hint { margin-bottom: 36px; font-family: var(--font-mono); font-size: 11px; color: var(--muted-foreground); letter-spacing: 0.1em; }
+    @media (min-width: 768px) { .hint { margin-bottom: 48px; } }
 
     .cards-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-    @media (min-width: 768px) { .cards-grid { grid-template-columns: 1fr 1fr; } }
-    @media (min-width: 1280px) { .cards-grid { grid-template-columns: 1fr 1fr 1fr; } }
+    @media (min-width: 640px) { .cards-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1100px) { .cards-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
 
-    .card-perspective { perspective: 1100px; height: 420px; }
+    .card-perspective { perspective: 1100px; height: 430px; }
+    @media (min-width: 480px) { .card-perspective { height: 420px; } }
     .flip-outer { width: 100%; height: 100%; position: relative; }
     .flip-inner {
       position: relative; width: 100%; height: 100%; transform-style: preserve-3d;
@@ -134,14 +137,16 @@ interface Project {
     .face.front { background: var(--card); }
     .corner-glow { position: absolute; top: 0; right: 0; width: 80px; height: 80px; pointer-events: none; }
 
-    .thumb { position: relative; height: 140px; flex-shrink: 0; overflow: hidden; }
+    .thumb { position: relative; height: 135px; flex-shrink: 0; overflow: hidden; background: var(--muted); }
+    @media (min-width: 480px) { .thumb { height: 140px; } }
     .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
     .card-perspective:hover .thumb img { transform: scale(1.06); }
-    .thumb-fade { position: absolute; inset: 0; }
+    .thumb-fade { position: absolute; inset: 0; z-index: 1; }
 
-    .front-body { padding: 20px 24px 8px; display: flex; flex-direction: column; flex: 1; }
-    .top-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
-    .icon { width: 32px; height: 32px; color: var(--foreground); }
+    .front-body { padding: 16px 18px 12px; display: flex; flex-direction: column; flex: 1; position: relative; }
+    @media (min-width: 480px) { .front-body { padding: 20px 24px 12px; } }
+    .top-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+    .icon { width: 30px; height: 30px; color: var(--foreground); flex-shrink: 0; }
     .icon svg { width: 100%; height: 100%; }
     .dot-ic { display: inline-block; width: 8px; height: 8px; vertical-align: middle; }
     .lock-ic { display: inline-block; width: 12px; height: 12px; vertical-align: middle; margin-right: 4px; }
@@ -149,17 +154,25 @@ interface Project {
     .cat { font-family: var(--font-mono); font-size: 9px; border: 1px solid; padding: 2px 6px; letter-spacing: 0.1em; }
     .status { font-family: var(--font-mono); font-size: 8px; color: var(--accent); letter-spacing: 0.1em; animation: hud-blink 2s ease-in-out infinite; }
 
-    .title { font-family: var(--font-display); font-size: clamp(1.05rem, 1.8vw, 1.3rem); font-weight: 600; color: var(--foreground); line-height: 1.15; margin-bottom: 10px; }
-    .desc { font-size: 12.5px; line-height: 1.55; color: var(--muted-foreground); flex: 1; margin-bottom: 16px; }
-    .tech-row { display: flex; flex-wrap: wrap; gap: 6px; }
-    .tech { font-family: var(--font-mono); font-size: 10px; color: var(--muted-foreground); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 2px 8px; }
+    .title { font-family: var(--font-display); font-size: clamp(1.05rem, 1.8vw, 1.3rem); font-weight: 600; color: var(--foreground); line-height: 1.15; margin-bottom: 8px; }
+    .desc { font-size: 12px; line-height: 1.5; color: var(--muted-foreground); flex: 1; margin-bottom: 20px; }
+    .tech-row { display: flex; flex-wrap: wrap; gap: 6px; padding-bottom: 20px; }
+    .tech { font-family: var(--font-mono); font-size: 10px; color: var(--muted-foreground); background: var(--muted); border: 1px solid var(--border); padding: 2px 8px; }
 
-    .flip-hint { position: absolute; bottom: 10px; right: 14px; font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; }
+    .flip-hint {
+      position: absolute; bottom: 10px; right: 14px;
+      font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.15em;
+      color: var(--muted-foreground);
+      background: var(--card); padding: 2px 6px; border-radius: 2px;
+      display: flex; align-items: center; gap: 4px; border: 1px solid var(--border);
+    }
     .refresh-ic { display: inline-block; width: 10px; height: 10px; vertical-align: middle; }
     .ext-ic { display: inline-block; width: 12px; height: 12px; vertical-align: middle; margin-left: 4px; }
-    .bottom-accent { position: absolute; bottom: 0; left: 0; height: 2px; width: 100%; opacity: 0.5; }
+    .bottom-accent { position: absolute; bottom: 0; left: 0; height: 2px; width: 100%; opacity: 0.35; }
 
-    .face.back { transform: rotateY(180deg); padding: 24px; justify-content: space-between; border-width: 1px; border-style: solid; }
+    .face.back { transform: rotateY(180deg); padding: 20px 18px; justify-content: space-between; border-width: 1px; border-style: solid; box-shadow: 0 10px 30px var(--ring); }
+    @media (min-width: 480px) { .face.back { padding: 24px; } }
+    body.dark .face.back { background: linear-gradient(135deg, var(--muted) 0%, var(--card) 60%) !important; }
     .back-grid { position: absolute; inset: 0; background-size: 24px 24px; pointer-events: none; }
     .back-top { position: relative; }
     .back-head { display: flex; gap: 8px; align-items: center; margin-bottom: 14px; }
@@ -177,7 +190,7 @@ interface Project {
       display: inline-block; margin-bottom: 12px; padding: 7px 14px; font-family: var(--font-mono);
       font-size: 10.5px; letter-spacing: 0.08em; border: 1px solid; transition: all 0.25s ease;
     }
-    .link-btn:hover { background: rgba(255,255,255,0.06); }
+    .link-btn:hover { background: var(--muted); }
     .private-badge {
       margin-bottom: 12px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.05em;
       color: var(--muted-foreground); border: 1px dashed var(--border); padding: 6px 10px; display: inline-block;
@@ -194,10 +207,10 @@ export class ProjectsComponent {
       fullDesc: "Conception et développement du site vitrine de DiGiVERSE Technologie : présentation des services (dev web/mobile, design, formations), portfolio de réalisations et prise de contact rapide.",
       tech: ['Vue.js', 'Design UI/UX', 'Vercel'],
       category: 'WEB · VITRINE',
-      accent: '#00c8ff',
+      accent: 'var(--primary)',
       icon: SVG_ICONS.globe,
       status: 'DÉPLOYÉ',
-      image: 'assets/images/projects/digiverse.svg',
+      image: '/assets/images/projects/digiverse.svg',
       link: 'https://digiversebenin.vercel.app/',
     },
     {
@@ -206,10 +219,10 @@ export class ProjectsComponent {
       fullDesc: 'Landing page pour le Marathon Commercial de Cotonou — inscription en ligne, système de paiement sécurisé, tableau de bord admin en temps réel.',
       tech: ['Next.js', 'Node.js', 'Supabase'],
       category: 'E-COMMERCE · ÉVÉNEMENT',
-      accent: '#00ffaa',
+      accent: 'var(--accent)',
       icon: SVG_ICONS.activity,
       status: 'DÉPLOYÉ',
-      image: 'assets/images/projects/marathon-commercial.svg',
+      image: '/assets/images/projects/marathon-commercial.svg',
       link: 'https://marathon-commercial-de-cotonou.vercel.app/',
     },
     {
@@ -218,10 +231,10 @@ export class ProjectsComponent {
       fullDesc: "Développement de 2 sites : présentation des émissions programmées de la Radio Bénin (SRTB) et plateforme de suivi live des programmes en temps réel.",
       tech: ['HTML5', 'Bootstrap', 'JavaScript'],
       category: 'WEB · MÉDIAS',
-      accent: '#00c8ff',
+      accent: 'var(--primary)',
       icon: SVG_ICONS.radio,
       status: 'DÉPLOYÉ',
-      image: 'assets/images/projects/radio-srtb.svg',
+      image: '/assets/images/projects/radio-srtb.svg',
       link: null,
     },
     {
@@ -230,10 +243,10 @@ export class ProjectsComponent {
       fullDesc: "Système complet de GED : archivage structuré, recherche intelligente, historique de modifications et gestion des droits d'accès par profils utilisateurs.",
       tech: ['Angular', 'Spring Boot', 'PostgreSQL'],
       category: 'LOGICIEL ENTREPRISE',
-      accent: '#7b2fff',
+      accent: 'var(--secondary)',
       icon: SVG_ICONS.folder,
       status: 'EN PRODUCTION',
-      image: 'assets/images/projects/archidoc-ged.svg',
+      image: '/assets/images/projects/archidoc-ged.svg',
       link: null,
     },
     {
@@ -242,10 +255,10 @@ export class ProjectsComponent {
       fullDesc: 'Gestion patients, dossiers médicaux, rendez-vous, prescriptions, stock de pharmacie et facturation — interface intuitive pour le personnel soignant.',
       tech: ['HTML5', 'CSS3', 'JavaScript'],
       category: 'SANTÉ · LOGICIEL',
-      accent: '#00c8ff',
+      accent: 'var(--primary)',
       icon: SVG_ICONS.hospital,
       status: 'LIVRÉ',
-      image: 'assets/images/projects/clinique-pharmacie.svg',
+      image: '/assets/images/projects/clinique-pharmacie.svg',
       link: null,
     },
     {
@@ -254,10 +267,10 @@ export class ProjectsComponent {
       fullDesc: "Conception et développement d'un site vitrine moderne pour l'entreprise Tramarq — présentation des services, galerie produits et formulaire de contact.",
       tech: ['Wix', 'Design', 'SEO'],
       category: 'WEB · VITRINE',
-      accent: '#7b2fff',
+      accent: 'var(--secondary)',
       icon: SVG_ICONS.building,
       status: 'EN LIGNE',
-      image: 'assets/images/projects/site-tramarq.svg',
+      image: '/assets/images/projects/site-tramarq.svg',
       link: null,
     },
     {
@@ -266,10 +279,10 @@ export class ProjectsComponent {
       fullDesc: 'Site institutionnel bilingue pour la Fondation ORE-OFE : présentation de la mission, galerie de projets humanitaires, actualités et formulaire de don.',
       tech: ['Wix', 'Design', 'Contenu'],
       category: 'ONG · FONDATION',
-      accent: '#00ffaa',
+      accent: 'var(--accent)',
       icon: SVG_ICONS.globe,
       status: 'EN LIGNE',
-      image: 'assets/images/projects/fondation-ore-ofe.svg',
+      image: '/assets/images/projects/fondation-ore-ofe.svg',
       link: null,
     },
   ];

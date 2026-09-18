@@ -136,32 +136,42 @@ interface CreativeSkill { name: string; icon: string; }
     </section>
   `,
   styles: [`
-    .about { position: relative; padding: 112px 0; overflow: hidden; }
-    @media (min-width: 768px) { .about { padding: 144px 0; } }
+    .about { position: relative; padding: 72px 0; overflow: hidden; }
+    @media (min-width: 768px) { .about { padding: 112px 0; } }
+    @media (min-width: 1024px) { .about { padding: 144px 0; } }
     .glow-tr {
       position: absolute; top: 0; right: 0; width: 384px; height: 384px; pointer-events: none;
-      background: radial-gradient(circle, rgba(123,47,255,0.05) 0%, transparent 70%);
+      background: radial-gradient(circle, var(--secondary) 0%, transparent 70%);
       transform: translate(30%, -30%);
+      opacity: 0.1;
     }
-    .grid { display: grid; grid-template-columns: 1fr; gap: 64px; }
-    @media (min-width: 1024px) { .grid { grid-template-columns: 1fr 1fr; gap: 96px; } }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 48px; }
+    @media (min-width: 1024px) { .grid { grid-template-columns: 1fr 1fr; gap: 64px; } }
+    @media (min-width: 1280px) { .grid { gap: 96px; } }
 
-    .bio-perspective { perspective: 1200px; margin-bottom: 48px; }
+    .bio-perspective { perspective: 1200px; margin-bottom: 40px; }
     .bio-card {
-      padding: 32px; border: 1px solid var(--border); background: var(--card);
+      padding: 24px 20px; border: 1px solid var(--border); background: var(--card);
       position: relative; overflow: hidden;
-      animation: border-glow 4s ease-in-out infinite;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
     }
+    @media (min-width: 640px) { .bio-card { padding: 32px; } }
+    body.dark .bio-card { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); }
     .mini-grid {
       position: absolute; inset: 0; pointer-events: none;
-      background-image: linear-gradient(rgba(0,200,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,200,255,0.03) 1px, transparent 1px);
+      background-image: linear-gradient(var(--foreground) 1px, transparent 1px), linear-gradient(90deg, var(--foreground) 1px, transparent 1px);
       background-size: 32px 32px;
+      opacity: 0.04;
     }
     .bio-inner { position: relative; }
     .bio-p { font-size: 14px; line-height: 1.75; color: var(--muted-foreground); }
-    .bio-meta { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .bio-meta {
+      margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border);
+      display: grid; grid-template-columns: 1fr; gap: 14px;
+    }
+    @media (min-width: 500px) { .bio-meta { grid-template-columns: 1fr 1fr; gap: 16px; } }
     .meta-label { display: block; font-size: 11px; margin-bottom: 2px; color: var(--primary); font-family: var(--font-mono); letter-spacing: 0.1em; }
-    .meta-value { font-size: 14px; color: var(--foreground); }
+    .meta-value { font-size: 13.5px; color: var(--foreground); word-break: break-word; }
 
     .subhead { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px; color: var(--primary); font-family: var(--font-mono); }
     .subhead.accent2 { color: var(--accent); }
@@ -173,22 +183,26 @@ interface CreativeSkill { name: string; icon: string; }
     }
     .tool-tag {
       font-family: var(--font-mono); font-size: 10px; color: var(--muted-foreground);
-      background: rgba(0,200,255,0.03); border: 1px solid rgba(0,200,255,0.14); padding: 3px 9px;
+      background: var(--muted); border: 1px solid var(--border); padding: 3px 9px;
     }
 
-    .creative-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    @media (min-width: 480px) { .creative-grid { grid-template-columns: repeat(3, 1fr); } }
+    .creative-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+    @media (min-width: 380px) { .creative-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 640px) { .creative-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 1024px) and (max-width: 1200px) { .creative-grid { grid-template-columns: repeat(2, 1fr); } }
     .creative-item {
       display: flex; align-items: center; gap: 8px; padding: 10px 12px;
-      border: 1px solid rgba(0,255,170,0.18); background: rgba(0,255,170,0.03);
+      border: 1px solid var(--border); background: var(--card);
       transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.02);
     }
     .creative-item:hover { border-color: var(--accent); background: rgba(0,255,170,0.08); transform: translateY(-2px); }
-    .creative-icon { width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; color: var(--accent); }
+    .creative-icon { width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; color: var(--accent); flex-shrink: 0; }
     .creative-icon svg { width: 100%; height: 100%; }
     .creative-name { font-family: var(--font-mono); font-size: 10.5px; color: var(--foreground); letter-spacing: 0.02em; line-height: 1.3; }
 
-    .lang-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 32px; }
+    .lang-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 500px) { .lang-grid { grid-template-columns: 1fr 1fr; gap: 20px 32px; } }
     .lang-row { display: flex; justify-content: space-between; margin-bottom: 5px; }
     .lang-name { font-size: 14px; font-weight: 500; color: var(--foreground); }
     .lang-level { font-family: var(--font-mono); font-size: 9px; color: var(--muted-foreground); letter-spacing: 0.08em; }
@@ -204,14 +218,15 @@ interface CreativeSkill { name: string; icon: string; }
 
     .skillbar { margin-bottom: 20px; }
     .sb-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 7px; }
-    .sb-name { font-family: var(--font-mono); font-size: 10px; color: rgba(232,232,240,0.65); letter-spacing: 0.1em; text-transform: uppercase; }
+    .sb-name { font-family: var(--font-mono); font-size: 10px; color: var(--muted-foreground); letter-spacing: 0.1em; text-transform: uppercase; }
     .sb-right { display: flex; align-items: center; gap: 7px; }
     .sb-pct { font-family: var(--font-mono); font-size: 11px; font-weight: 700; }
     .sb-lvl { font-family: var(--font-mono); font-size: 8px; color: var(--primary-foreground); padding: 1px 5px; letter-spacing: 0.06em; font-weight: 700; }
-    .sb-track { height: 9px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); position: relative; overflow: hidden; }
+    .sb-track { height: 9px; background: var(--muted); border: 1px solid var(--border); position: relative; overflow: hidden; }
     .sb-segments {
       position: absolute; inset: 0; z-index: 2; pointer-events: none;
-      background-image: repeating-linear-gradient(90deg, transparent 0px, transparent 9px, rgba(0,0,0,0.45) 9px, rgba(0,0,0,0.45) 10px);
+      background-image: repeating-linear-gradient(90deg, transparent 0px, transparent 9px, var(--background) 9px, var(--background) 10px);
+      opacity: 0.4;
     }
     .sb-fill { position: absolute; top: 0; left: 0; height: 100%; }
   `],
@@ -260,25 +275,26 @@ export class AboutComponent {
   ];
 
   languages: Language[] = [
-    { lang: 'Français', level: 'Natif', pct: 100, color: '#00c8ff' },
-    { lang: 'Anglais', level: 'Courant', pct: 82, color: '#7b2fff' },
-    { lang: 'Espagnol', level: 'Intermédiaire', pct: 55, color: '#00ffaa' },
-    { lang: 'Fon', level: 'Courant', pct: 80, color: '#00c8ff' },
-    { lang: 'Saxwe', level: 'Courant + écrit', pct: 75, color: '#7b2fff' },
-    { lang: 'Mina', level: 'Intermédiaire', pct: 50, color: '#00ffaa' },
+    { lang: 'Français', level: 'Natif', pct: 100, color: 'var(--primary)' },
+    { lang: 'Anglais', level: 'Courant', pct: 82, color: 'var(--secondary)' },
+    { lang: 'Espagnol', level: 'Intermédiaire', pct: 55, color: 'var(--accent)' },
+    { lang: 'Fon', level: 'Courant', pct: 80, color: 'var(--primary)' },
+    { lang: 'Saxwe', level: 'Courant + écrit', pct: 75, color: 'var(--secondary)' },
+    { lang: 'Mina', level: 'Intermédiaire', pct: 50, color: 'var(--accent)' },
   ];
 
   tools = [
     'VS Code', 'Android Studio', 'Adobe Photoshop',
     'Adobe Illustrator', 'Adobe Premiere Pro', 'Audacity',
-    'CapCut', 'XAMPP / WAMP', 'Windows', 'Linux Mint', 'Ubuntu',
+    'CapCut', 'XAMPP / WAMP', 'DataCamp', 'IA & LLMs',
+    'Data Visualisation', 'Windows', 'Linux Mint', 'Ubuntu',
     'Word / Excel',
   ];
 
   counts: Record<string, number> = {};
 
   barColor(level: number): string {
-    return level >= 85 ? '#00ffaa' : level >= 72 ? '#00c8ff' : '#7b2fff';
+    return level >= 85 ? 'var(--accent)' : level >= 72 ? 'var(--primary)' : 'var(--secondary)';
   }
 
   startCount(skill: Skill, index: number) {
